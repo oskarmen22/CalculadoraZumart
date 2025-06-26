@@ -1,0 +1,424 @@
+/* --- Estilos Generales y Reseteo (Optimizados) --- */
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  /* --- Contenedores Principales (Tamaño original) --- */
+  .main-content, .historial-container, .buscar-container {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 450px;
+    box-sizing: border-box;
+  }
+  
+  .historial-container, .buscar-container {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    max-height: calc(100vh - 20px);
+    overflow-y: auto;
+    z-index: 999; 
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  .historial-container h2, .buscar-container h2 {
+      margin-top: 10px;
+      margin-bottom: 20px;
+  }
+
+  /* --- Título de la Aplicación --- */
+  h1 {
+    font-size: 20.8px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  .app-name-zumart {
+    color: #87CEEB;
+    font-weight: bold;
+  }
+  h2 {
+      font-size: 14.3px;
+      color: #555;
+      margin-top: 20px;
+      margin-bottom: 15px;
+  }
+
+  /* --- Campos de Entrada --- */
+  input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 11.7px;
+    box-sizing: border-box;
+  }
+  input:focus {
+      outline: 2px solid #007bff;
+      border-color: #007bff;
+  }
+
+  /* --- Botones --- */
+  button {
+    background-color: #28a745;
+    color: white;
+    padding: 14.3px 16.25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 11.7px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    width: 100%;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  button:hover {
+    background-color: #218838;
+  }
+  button:active {
+      transform: scale(0.98);
+  }
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+  .btn-guardar { background-color: #007bff; }
+  .btn-guardar:hover { background-color: #0056b3; }
+  .btn-borrar-actual { background-color: #ffc107; color: #333;}
+  .btn-borrar-actual:hover { background-color: #e0a800; }
+  .btn-historial { background-color: #6c757d; }
+  .btn-historial:hover { background-color: #5a6268; }
+  .btn-cerrar-historial { background-color: #6c757d; margin-bottom: 15px; }
+  .btn-cerrar-historial:hover { background-color: #5a6268; }
+  /* Nuevo botón para buscar producto */
+  .btn-buscar-producto { background-color: #0056b3; }
+  .btn-buscar-producto:hover { background-color: #004085; }
+  .btn-salida { background-color: #6c757d; }
+  .btn-salida:hover { background-color: #5a6268; }
+  .btn-regresar-principal { background-color: #28a745; }
+  .btn-regresar-principal:hover { background-color: #218838; }
+
+
+  /* --- Lista de Productos --- */
+  #totalPrecios {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 15.6px;
+    font-weight: bold;
+    color: #0056b3;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  #listaProductos ul {
+    list-style: none;
+    padding: 0;
+  }
+  #listaProductos li {
+    background-color: #fefefe;
+    margin-bottom: 10px;
+    padding: 14.3px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+    font-size: 10.4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    position: relative;
+    padding-right: 50px;
+  }
+  /* Estilo del botón de eliminar en la lista de productos */
+  #listaProductos li .eliminar-btn {
+    background-color: #dc3545 !important;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 6px; 
+    cursor: pointer;
+    font-size: 19.5px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    position: absolute; 
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    padding: 0;
+  }
+  #listaProductos li .eliminar-btn:hover {
+    background-color: #c82333 !important;
+  }
+
+  /* --- Historial (Formato restaurado y ajustado) --- */
+  #historialListas div.historial-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    position: relative;
+    font-size: 10.4px;
+    line-height: 1.5;
+    padding-bottom: 60px;
+  }
+  #historialListas div.historial-item h4 {
+      margin-top: 10px;
+      margin-bottom: 8px;
+      font-size: 11.7px;
+      color: #333;
+  }
+  
+  /* ESTILO PARA LAS DOS COLUMNAS - AJUSTADO */
+  .historial-item .productos-historial {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr; 
+      gap: 5px 20px;
+      font-size: 9.1px;
+      color: #666;
+  }
+  .historial-item .productos-historial li {
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      margin-bottom: 0;
+      display: contents; 
+  }
+  .historial-item .productos-historial li span {
+      display: inline-block; 
+      vertical-align: top;
+      padding: 2px 0; 
+  }
+  .historial-item .productos-historial li .nombre-producto-historial {
+      font-weight: bold;
+      color: #333;
+  }
+  #historialListas div.historial-item .total-historial {
+    font-size: 12.35px;
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 10px;
+    display: block;
+  }
+
+  /* Posicionamiento de los botones en el historial: INFERIOR DERECHA */
+  .historial-item-actions {
+    position: absolute;
+    bottom: 15px; 
+    right: 15px; 
+    display: flex;
+    flex-direction: column; 
+    gap: 8px; 
+  }
+  /* Estilo de los botones de acción del historial */
+  .historial-item-actions button {
+    width: 35px;
+    height: 35px;
+    font-size: 15.6px;
+    border-radius: 6px; 
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  /* Estilo específico para el botón de borrar del historial */
+  .historial-item-actions .delete-historial-btn {
+    background-color: #dc3545 !important;
+    color: white;
+  }
+  .historial-item-actions .delete-historial-btn:hover {
+    background-color: #c82333 !important;
+  }
+  .historial-item-actions .edit-historial-btn {
+    background-color: #007bff;
+    color: white;
+  }
+  .historial-item-actions .edit-historial-btn:hover {
+    background-color: #0056b3;
+  }
+
+  /* --- Controles de búsqueda (input y botones) --- */
+  .search-controls {
+      display: flex;
+      flex-direction: column; /* Cambiado a columna para el nuevo diseño */
+      align-items: stretch; /* Estira los elementos para llenar el ancho */
+      gap: 15px; /* Espacio entre el grupo de botones y el input */
+      margin-bottom: 20px;
+  }
+  .search-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap; /* Permite que los botones se envuelvan */
+      justify-content: center; /* Centra los botones en su fila */
+  }
+  .search-buttons button {
+      width: auto;
+      padding: 10px 15px;
+      font-size: 10.4px;
+      margin: 0;
+      flex-grow: 1; /* Permite que los botones crezcan para llenar el espacio */
+      min-width: 120px;
+  }
+  .search-controls #searchInput {
+      width: 100%;
+      margin-bottom: 0; /* Ya está en el contenedor, no necesita margen inferior */
+  }
+
+  /* --- Estilo de resultados de búsqueda --- */
+  #searchResults .search-result-item {
+      background-color: #f9f9f9;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      text-align: left;
+      font-size: 10.4px;
+      line-height: 1.4;
+      border: 1px solid #eee;
+  }
+  #searchResults .search-result-item strong {
+      font-size: 11.7px;
+      color: #333;
+  }
+
+  /* --- Modal Personalizado --- */
+  .custom-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .custom-modal-content {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 90%;
+    width: 300px;
+    position: relative;
+    font-size: 11.7px;
+    line-height: 1.5;
+  }
+
+  .custom-modal-content h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 15.6px;
+    margin-bottom: 15px;
+  }
+
+  .custom-modal-content p {
+    margin-bottom: 25px;
+    color: #555;
+  }
+
+  .custom-modal-content .modal-buttons button {
+    width: 91px;
+    padding: 11.7px;
+    margin: 0 8px;
+    border-radius: 6.5px;
+    font-size: 11.7px;
+  }
+
+  /* --- Media Query para Tabletas (7 pulgadas) --- */
+  @media (min-width: 600px) and (max-width: 800px) {
+    .main-content, .historial-container, .buscar-container {
+        max-width: 500px;
+        padding: 30px;
+    }
+    h1 {
+        font-size: 23.4px;
+    }
+    input[type="text"], input[type="number"], button {
+        font-size: 13px;
+        padding: 16.25px;
+    }
+    #totalPrecios {
+        font-size: 18.2px;
+    }
+    #listaProductos li {
+        font-size: 11.7px;
+        padding: 16.25px;
+    }
+    #listaProductos li .eliminar-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 20.8px;
+    }
+    .historial-item-actions button {
+        width: 39px;
+        height: 39px;
+        font-size: 18.2px;
+    }
+    .historial-item-actions {
+      right: 20px;
+      left: initial;
+      bottom: 20px;
+    }
+    /* En tabletas también ajustamos el gap */
+    .historial-item .productos-historial {
+      gap: 7px 25px; 
+    }
+  }
+
+  /* --- Media Query para Escritorio (mantenido) --- */
+  @media (min-width: 801px) {
+    .main-content, .historial-container, .buscar-container {
+      width: 450px;
+      max-width: 450px;
+      padding: 30px;
+      position: relative;
+      transform: none;
+    }
+    .button-group {
+      flex-direction: row;
+    }
+    .historial-container, .buscar-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-height: calc(100vh - 20px);
+    }
+    .custom-modal-content {
+        max-width: 400px;
+    }
+  }

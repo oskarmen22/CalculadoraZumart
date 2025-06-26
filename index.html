@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Compras Zumart</title>
+
+  <link rel="manifest" href="manifest.json">
+
+  <link rel="stylesheet" href="style.css"> 
+  
+</head>
+<body>
+
+  <div class="main-content" id="mainContent">
+    <h1>Calculadora <span class="app-name-zumart">Zumart</span></h1>
+
+    <input type="text" id="productoInput" placeholder="Producto">
+    <input type="number" id="precioInput" placeholder="Precio" min="0" step="0.01">
+    <input type="number" id="cantidadInput" placeholder="Kilos/Unidades" min="0" step="0.001"> 
+    <button onclick="añadirALista()">Añadir a la Lista</button>
+
+    <div class="button-group">
+      <button class="btn-guardar" onclick="guardarLista()">Guardar Lista en Historial</button>
+      <button class="btn-borrar-actual" onclick="confirmBorrarListaActual()">Borrar Lista Actual</button>
+      <button class="btn-historial" onclick="toggleView('historial')">Ver Historial</button>
+    </div>
+
+    <div id="listaProductos">
+      <div id="totalPrecios">Total a Pagar: $0</div>
+      <h2>Productos Añadidos:</h2>
+      <ul id="itemsLista">
+        </ul>
+    </div>
+  </div>
+
+  <div class="historial-container" id="historialContainer">
+      <h2>Historial de Listas</h2>
+      <button class="btn-cerrar-historial" onclick="toggleView('main')">Cerrar Historial</button>
+      <button class="btn-buscar-producto" onclick="toggleView('buscar')">Buscar Producto</button>
+      <div id="historialListas">
+          </div>
+  </div>
+
+  <div class="buscar-container" id="buscarContainer">
+      <h2>Buscar Producto en el Historial</h2>
+      <div class="search-controls">
+          <div class="search-buttons">
+              <button class="btn-salida" onclick="toggleView('historial')">Salida</button>
+              <button class="btn-regresar-principal" onclick="toggleView('main')">Regresar a Principal</button>
+          </div>
+          <input type="text" id="searchInput" placeholder="Escribe el nombre del producto...">
+      </div>
+      <div id="searchResults">
+          </div>
+  </div>
+
+  <div class="custom-modal-overlay" id="customModal">
+      <div class="custom-modal-content">
+          <h3 id="modalTitle"></h3>
+          <p id="modalMessage"></p>
+          <div class="modal-buttons">
+              <button class="btn-ok" id="modalOkBtn">Aceptar</button>
+              <button class="btn-cancel" id="modalCancelBtn" style="display: none;">Cancelar</button>
+          </div>
+      </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(registration => console.log('Service Worker registrado:', registration))
+        .catch(error => console.log('Registro de Service Worker fallido:', error));
+    }
+  </script>
+  
+</body>
+</html>
